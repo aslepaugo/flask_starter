@@ -1,16 +1,14 @@
-from flask import Flask
+from flask import Flask, render_template
 from weather import weather_by_city
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    page_title = "Python news"
     weather = weather_by_city("Wroclaw")
 
-    if weather:
-        return f"Weather {weather['temp_C']}, feels like {weather['FeelsLikeC']}"
-    else:
-        return "Service is unavailable now"
+    return render_template('index.html', page_title=page_title, weather=weather)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
