@@ -10,16 +10,19 @@ def weather_by_city(city_name):
         "num_of_days": 1,
         "lang": "ru"
     }
-    result = requests.get(weather_url, params=params)
-    weather = result.json()
+    try:
+        result = requests.get(weather_url, params=params)
+        weather = result.json()
 
-    if 'data' in weather:
-        if 'current_condition' in weather['data']:
-            try:
-                return weather['data']['current_condition'][0]
-            except(IndexError, TypeError):
-                return False
-
+        if 'data' in weather:
+            if 'current_condition' in weather['data']:
+                try:
+                    return weather['data']['current_condition'][0]
+                except(IndexError, TypeError):
+                    return False
+    except(requests.RequestException, ValueError):
+        print("Network error")
+        return False
     return False
 
 
