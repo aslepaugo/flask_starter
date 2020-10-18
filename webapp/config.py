@@ -1,0 +1,1 @@
+WEATHER_DEFAULT_CITY="Wroclaw"

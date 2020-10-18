@@ -2,3 +2,4 @@
 settings_local.py
 /__pycache__
 /.vscode
+webapp/__pycache__/
