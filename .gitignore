@@ -1,4 +1,6 @@
 /env
 settings_local.py
-/__pycache__
+__pycache__/
 /.vscode
+
+*.db
