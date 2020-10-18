@@ -21,11 +21,15 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(128), nullable=False)
     role = db.Column(db.String(10), nullable=False, index=True)
 
-    def __repr__(self):
-        return '<User {}>'.format(self.username)
-
     def set_password(self, password):
         self.password = generate_password_hash(password)
     
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+    @property
+    def is_admin(self):
+        return self.role == 'admin'
+        
+    def __repr__(self):
+        return '<User {}>'.format(self.username)

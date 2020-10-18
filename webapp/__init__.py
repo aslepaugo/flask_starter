@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user 
 
 from webapp.weather import weather_by_city
 from webapp.model import db, News, User
@@ -29,6 +29,8 @@ def create_app():
 
     @app.route('/login')
     def login():
+        if current_user.is_authenticated:
+            return redirect(url_for('index'))
         title = "Authorization"
         login_form = LoginForm()
 
@@ -55,5 +57,13 @@ def create_app():
         logout_user()
         flash("You have been successfully loged out")
         return redirect(url_for('index'))
+
+    @app.route('/admin')
+    @login_required
+    def admin_index():
+        if current_user.is_admin:
+            return "Hello Admin"
+        else:
+            return "You are not admin"
 
     return app
