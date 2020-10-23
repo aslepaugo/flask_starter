@@ -2,7 +2,8 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 
-from webapp.model import db, News
+from webapp.db import db, News
+
 
 def get_html(url):
     try:
@@ -12,6 +13,7 @@ def get_html(url):
     except(requests.RequestException, ValueError):
         print("Network error")
         return False
+
 
 def get_python_news():
     html = get_html("https://www.python.org/blogs/")
@@ -32,7 +34,6 @@ def get_python_news():
 
 
 def save_news(title, url, published):
-    
     news_exists = News.query.filter(News.url == url).count()
 
     if not news_exists:
