@@ -15,8 +15,8 @@ def login():
     login_form = LoginForm()
 
     return render_template(
-        'user/login.html', 
-        page_title=title, 
+        'user/login.html',
+        page_title=title,
         form=login_form)
 
 
