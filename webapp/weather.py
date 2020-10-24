@@ -1,6 +1,7 @@
 import requests
 import settings
 
+
 def weather_by_city(city_name):
     weather_url = 'https://api.worldweatheronline.com/premium/v1/weather.ashx'
     params = {
